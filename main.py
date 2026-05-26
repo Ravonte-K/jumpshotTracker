@@ -35,7 +35,7 @@ def armFlickReg(velo: float):
         return veloTrack
 
 def wristFlickReg(velo: float):
-    if velo >= 40:
+    if velo >= 80:
         wristVeloTrack.append(float(velo))
         print(wristresult)
         return wristVeloTrack
@@ -88,7 +88,7 @@ with mp_pose.Pose() as pose:
                 if armresult is not None:
                     cv.putText(frame, f"Arm: {armresult}",
                         (50, 200), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-                    cv.rectangle(frame, (100, 200), (400, 230), (0, 0, 255), -1)
+                    cv.rectangle(frame, (100, 200), (400, 230), (0, 255, 255), -1)
 
                 wristresult = wristFlickReg(wristflick)
                 if wristresult is not None:

@@ -31,7 +31,7 @@ def flickSpeed(g, history, dt):
         return float(angular_velocity)
 
 def shotAttempt(wristVelo: float, armVelo: float) -> bool | None:
-    if (armVelo >= 250) and (wristVelo >= 80):
+    if (armVelo >= 200) and (wristVelo >= 80):
         return True
     elif (armVelo < 250 and armVelo > 20) or (wristVelo < 80 and wristVelo > 20):
         return False
@@ -89,7 +89,7 @@ with mp_pose.Pose() as pose:
                         "wrist_path":     [wrist[:]],
                         "arm_velo_frames": [elbowflick]
                     })
-                    cv.rectangle(frame, (100, 200), (400, 230), (0, 255, 255), -1)
+                    cv.rectangle(frame, (100, 200), (400, 230), (0, 255, 0), -1)
 
                 elif shotStatus == 'IN_SHOT':
                     shotLog[-1]["peak_arm_velo"]    = max(shotLog[-1]["peak_arm_velo"], elbowflick)
@@ -97,7 +97,7 @@ with mp_pose.Pose() as pose:
                     shotLog[-1]["elbow_path"].append(elbow[:])
                     shotLog[-1]["wrist_path"].append(wrist[:])
                     shotLog[-1]["arm_velo_frames"].append(elbowflick)
-                    cv.rectangle(frame, (100, 200), (400, 230), (0, 255, 255), -1)
+                    cv.rectangle(frame, (100, 200), (400, 230), (0, 255, 0), -1)
                     
 
                     if (now - shot_start_time) > 0.8:
@@ -106,7 +106,7 @@ with mp_pose.Pose() as pose:
                         print(shotLog[-1])
 
                 elif attempted == False:
-                    cv.rectangle(frame, (100, 200), (400, 230), (255, 255, 255), -1)
+                    cv.rectangle(frame, (100, 200), (400, 230), (0, 255, 255), -1)
 
         cv.imshow('Shot Tracker', frame)
         if cv.waitKey(1) & 0xFF == ord('q'):

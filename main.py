@@ -24,7 +24,7 @@ def getAngle(a, b, c):
     cosine = np.dot(ba, bc) / (np.linalg.norm(ba) * np.linalg.norm(bc))
     return np.degrees(np.arccos(np.clip(cosine, -1.0, 1.0)))
 
-def flickSpeed(g, history, dt):
+def flickSpeed(g, history, dt) -> float | None:
     history.append(g)
     if len(history) >= 2 and dt > 0.001:
         angular_velocity = (history[-1] - history[-2]) / dt
